@@ -147,7 +147,7 @@ register_font :: proc(e: ^Engine, font: ^Font, name: string = "") -> (id: Font_I
 		id     = font_id,
 		font   = font,
 		name   = name,
-		family = "", // TODO: Extract from name table
+		family = "",       // TODO: Extract from name table
 		style  = .Regular, // TODO: Determine from OS/2 table
 		weight = .Regular,
 		width  = .Normal,
@@ -158,4 +158,82 @@ register_font :: proc(e: ^Engine, font: ^Font, name: string = "") -> (id: Font_I
 	e.loaded_fonts[font_id] = identity
 
 	return font_id, true
+}
+
+
+
+// TODO(Ed): Untested
+Engine_2 :: struct {
+	// Memory management
+	allocator: mem.Allocator,
+
+	// Font management
+	loaded_fonts: [dynamic]Font_Identity,
+	// TODO(Ed): Add free front list if it actually becomes a traversal bottleneck
+
+	// Shaping cache
+	caches: map[Shaping_Cache_Key]Shaping_Cache,
+	
+	// Shaping configuration defaults
+	default_script:   Script_Tag,
+	default_language: Language_Tag,
+	default_features: Feature_Set,
+	buffer_pool:      []^Shaping_Buffer,
+	max_buffers:      uint,
+	// Performance statistics
+	cache_hits:       uint,
+	cache_misses:     uint,
+	// shaping_count:    uint,
+
+	// Threading/locking 
+	// mutex:            sync.Mutex,
+}
+
+// TODO(Ed): Untested
+engine_startup :: proc(engine: ^Engine_2, allocator := context.allocator, max_buffers: uint = 4) {
+	assert(engine              != nil)
+	assert(allocator.procedure != nil)
+	context.allocator = allocator
+
+	// Initialize maps
+	engine.loaded_fonts = make([dyanmic]Font_Identity, allocator, cap = 256)
+	engine.caches       = make(map[Shaping_Cache_Key]Shaping_Cache, capacity = 128, allocator = allocator)
+
+	// Initialize buffer pool
+	engine.buffer_pool = make([]^Shaping_Buffer, 0, max_buffers, allocator)
+	engine.max_buffers = max_buffers
+	append(& engine.buffer_pool, create_shaping_buffer())
+
+	// Set default values
+	engine.default_script   = .latn
+	engine.default_language = .dflt
+	engine.default_features = create_feature_set(.liga, .clig, .kern)
+	
+	// Store allocator for future use
+	engine.allocator = allocator
+}
+
+// TODO(Ed): Untested
+font_register :: proc(e: ^Engine_2, font: ^Font, name: string = "") {
+	assert(engine != nil)
+	assert(font   != nil)
+
+	// Generate a new unique ID
+	font_id := Font_ID(e._next_font_id)
+	e._next_font_id += 1
+
+	// Create identity
+	identity := Font_Identity {
+		id     = font_id,
+		font   = font,
+		name   = name,
+		family = "",       // TODO: Extract from name table
+		style  = .Regular, // TODO: Determine from OS/2 table
+		weight = .Regular,
+		width  = .Normal,
+		slant  = .Normal,
+	}
+
+	// Register in loaded fonts
+	e.loaded_fonts[font_id] = identity
 }

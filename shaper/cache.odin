@@ -4,11 +4,11 @@ import ttf "../ttf"
 import "core:fmt"
 
 Shaping_Cache_Key :: struct {
-	font_id:           ^Font, // Unique identifier for the font
-	script:            Script_Tag, // Script being shaped
+	font_id:           ^Font,        // Unique identifier for the font
+	script:            Script_Tag,   // Script being shaped
 	language:          Language_Tag, // Language for shaping
-	features:          Feature_Set, // Enabled features
-	disabled_features: Feature_Set, // Explicitly disabled features
+	features:          Feature_Set,  // Enabled features
+	disabled_features: Feature_Set,  // Explicitly disabled features
 	// features_hash:     uint, // todo: convert features into a hash
 }
 

@@ -195,6 +195,7 @@ set_script :: proc(buffer: ^Shaping_Buffer, script: Script_Tag, language: Langua
 	buffer.direction = get_script_direction(script)
 }
 
+// TODO(Ed): Should be profiled?
 // Convert text to []rune and set buffer state
 prepare_text :: proc(buf: ^Shaping_Buffer, text: string) {
 	if buf == nil {return}

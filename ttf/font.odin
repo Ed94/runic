@@ -6,56 +6,56 @@ Glyph :: distinct u16
 
 Table_Tag :: enum {
 	unknown, // NOTE(lucas): not an actual table 
-	avar,
-	BASE,
-	CBDT,
-	CBLC,
-	CFF,
-	CFF2,
-	cmap,
-	COLR,
-	CPAL,
-	cvar,
-	cvt,
-	DSIG,
-	EBDT,
-	EBLC,
-	EBSC,
-	fpgm,
-	fvar,
-	gasp,
-	GDEF,
-	glyf,
-	GPOS,
-	GSUB,
-	gvar,
-	hdmx,
-	head,
-	hhea,
-	hmtx,
-	HVAR,
-	JSTF,
-	kern,
-	loca,
-	LTSH,
-	MATH,
-	maxp,
-	MERG,
-	meta,
-	MVAR,
-	name,
-	OS2,
-	PCLT,
-	post,
-	prep,
-	sbix,
-	STAT,
-	SVG,
-	VDMX,
-	vhea,
-	vmtx,
-	VORG,
-	VVAR,
+	avar,    // Axis Variations:                            https://learn.microsoft.com/en-us/typography/opentype/otspec184/avar
+	BASE,    // Baseline:                                   https://learn.microsoft.com/en-us/typography/opentype/spec/base
+	CBDT,    // Color Bitmap Data:                          https://learn.microsoft.com/en-us/typography/opentype/spec/cbdt
+	CBLC,    // Color Bitmap Location:                      https://learn.microsoft.com/en-us/typography/opentype/spec/cblc
+	CFF,     // Compact Font Format (Version 1):            https://learn.microsoft.com/en-us/typography/opentype/spec/cff
+	CFF2,    // Compact Font Format (Version 2):            https://learn.microsoft.com/en-us/typography/opentype/spec/cff2
+	cmap,    // Character to Glyph Index Mapping:           https://learn.microsoft.com/en-us/typography/opentype/spec/cmap
+	COLR,    // Color:                                      https://learn.microsoft.com/en-us/typography/opentype/spec/colr
+	CPAL,    // Color Palette:                              https://learn.microsoft.com/en-us/typography/opentype/spec/cpal
+	cvar,    // CVT Variations:                             https://learn.microsoft.com/en-us/typography/opentype/spec/cvar
+	cvt,     // Control Value:                              https://learn.microsoft.com/en-us/typography/opentype/spec/cvt
+	DSIG,    // Digital Signature:                          https://learn.microsoft.com/en-us/typography/opentype/spec/dsig
+	EBDT,    // Embedded Bitmap Data:                       https://learn.microsoft.com/en-us/typography/opentype/spec/ebdt
+	EBLC,    // Embedded Bitmap Location:                   https://learn.microsoft.com/en-us/typography/opentype/spec/eblc
+	EBSC,    // Embedded Bitmap Scaling:                    https://learn.microsoft.com/en-us/typography/opentype/spec/ebsc
+	fpgm,    // Font Program:                               https://learn.microsoft.com/en-us/typography/opentype/spec/fpgm
+	fvar,    // Font Variations:                            https://learn.microsoft.com/en-us/typography/opentype/spec/fvar
+	gasp,    // Grid-fitting and Scan-conversion Procedure: https://learn.microsoft.com/en-us/typography/opentype/spec/gasp
+	GDEF,    // Glyph Definition:                           https://learn.microsoft.com/en-us/typography/opentype/spec/gdef
+	glyf,    // Glyph Data:                                 https://learn.microsoft.com/en-us/typography/opentype/spec/glyf
+	GPOS,    // Glyph Positioning:                          https://learn.microsoft.com/en-us/typography/opentype/spec/gpos
+	GSUB,    // Glyph Substitution:                         https://learn.microsoft.com/en-us/typography/opentype/spec/gsub
+	gvar,    // Glyph Variations:                           https://learn.microsoft.com/en-us/typography/opentype/spec/gvar
+	hdmx,    // Horizontal Device Metrics:                  https://learn.microsoft.com/en-us/typography/opentype/spec/hdmx
+	head,    // Font Header:                                https://learn.microsoft.com/en-us/typography/opentype/spec/head
+	hhea,    // Horizontal Header:                          https://learn.microsoft.com/en-us/typography/opentype/spec/hhea
+	hmtx,    // Horizontal Metrics:                         https://learn.microsoft.com/en-us/typography/opentype/spec/hmtx
+	HVAR,    // Horizontal Metrics Variations:              https://learn.microsoft.com/en-us/typography/opentype/spec/hvar
+	JSTF,    // Justification:                              https://learn.microsoft.com/en-us/typography/opentype/spec/jstf
+	kern,    // Kerning:                                    https://learn.microsoft.com/en-us/typography/opentype/spec/kern
+	loca,    // Index to Location:                          https://learn.microsoft.com/en-us/typography/opentype/spec/loca
+	LTSH,    // Linear Threshold:                           https://learn.microsoft.com/en-us/typography/opentype/spec/ltsh
+	MATH,    // The Mathematical Typesetting:               https://learn.microsoft.com/en-us/typography/opentype/spec/math
+	maxp,    // Maximum Profile:                            https://learn.microsoft.com/en-us/typography/opentype/spec/maxp
+	MERG,    // Merge:                                      https://learn.microsoft.com/en-us/typography/opentype/spec/merg
+	meta,    // Metadata:                                   https://learn.microsoft.com/en-us/typography/opentype/spec/meta
+	MVAR,    // Metrics Variations:                         https://learn.microsoft.com/en-us/typography/opentype/spec/mvar
+	name,    // Naming:                                     https://learn.microsoft.com/en-us/typography/opentype/spec/name
+	OS2,     // OS/2 and Windows Metrics:                   https://learn.microsoft.com/en-us/typography/opentype/spec/os2
+	PCLT,    // PCL 5:                                      https://learn.microsoft.com/en-us/typography/opentype/spec/pclt
+	post,    // PostScript:                                 https://learn.microsoft.com/en-us/typography/opentype/spec/post
+	prep,    // Control Value Program:                      https://learn.microsoft.com/en-us/typography/opentype/spec/prep
+	sbix,    // Standard Bitmap Graphics:                   https://learn.microsoft.com/en-us/typography/opentype/spec/sbix
+	STAT,    // Style Attributes:                           https://learn.microsoft.com/en-us/typography/opentype/spec/stat
+	SVG,     // SVG (Scalable Vector Graphics):             https://learn.microsoft.com/en-us/typography/opentype/spec/svg
+	VDMX,    // Vertical Device Metrics:                    https://learn.microsoft.com/en-us/typography/opentype/spec/vdmx
+	vhea,    // Vertical Header:                            https://learn.microsoft.com/en-us/typography/opentype/spec/vhea
+	vmtx,    // Vertical Metrics:                           https://learn.microsoft.com/en-us/typography/opentype/spec/vmtx
+	VORG,    // Vertical Origin:                            https://learn.microsoft.com/en-us/typography/opentype/spec/vorg
+	VVAR,    // Vertical Metrics Variations:                https://learn.microsoft.com/en-us/typography/opentype/spec/vvar
 }
 
 Table_Tags :: distinct bit_set[Table_Tag]
@@ -211,25 +211,25 @@ Font_Error :: enum {
 Font_Feature :: enum {
 	// Core features
 	TRUETYPE_OUTLINES, // Has 'glyf' table
-	CFF_OUTLINES, // Has 'CFF' or 'CFF2' table
-	BITMAP_GLYPHS, // Has 'EBDT'/'EBLC' or 'CBDT'/'CBLC'
-	SVG_GLYPHS, // Has 'SVG' table
-	COLOR_GLYPHS, // Has 'COLR'/'CPAL'
+	CFF_OUTLINES,      // Has 'CFF' or 'CFF2' table
+	BITMAP_GLYPHS,     // Has 'EBDT'/'EBLC' or 'CBDT'/'CBLC'
+	SVG_GLYPHS,        // Has 'SVG' table
+	COLOR_GLYPHS,      // Has 'COLR'/'CPAL'
 
 	// Typography features 
-	KERNING, // Has 'kern' or 'GPOS' with kerning
-	LIGATURES, // Has 'GSUB' with ligature features
-	MARK_POSITIONING, // Has 'GPOS' with mark positioning
-	VERTICAL_METRICS, // Has 'vhea'/'vmtx'
+	KERNING,           // Has 'kern' or 'GPOS' with kerning
+	LIGATURES,         // Has 'GSUB' with ligature features
+	MARK_POSITIONING,  // Has 'GPOS' with mark positioning
+	VERTICAL_METRICS,  // Has 'vhea'/'vmtx'
 
 	// Variable fonts
-	VARIABLE_FONT, // Has 'fvar'
+	VARIABLE_FONT,     // Has 'fvar'
 
 	// Other common features
-	HINTING, // Has hinting tables ('fpgm', 'prep', 'cvt')
-	MATHEMATICAL, // Has 'MATH' table
-	GRAPHITE, // Has SIL Graphite tables
-	AAT, // Has Apple Advanced Typography tables
+	HINTING,           // Has hinting tables ('fpgm', 'prep', 'cvt')
+	MATHEMATICAL,      // Has 'MATH' table
+	GRAPHITE,          // Has SIL Graphite tables
+	AAT,               // Has Apple Advanced Typography tables
 }
 
 Font_Features :: bit_set[Font_Feature]
