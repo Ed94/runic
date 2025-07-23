@@ -3,26 +3,26 @@ package shaper
 import ttf "../ttf"
 Shaping_Buffer :: struct {
 	// Input text data
-	text:              string, // Original text
+	text:              string,        // Original text
 	runes:             [dynamic]rune, // Unicode codepoints
 
 	// Output glyph data
-	glyphs:            [dynamic]Glyph_Info, // Output shaped glyphs
+	glyphs:            [dynamic]Glyph_Info,     // Output shaped glyphs
 	positions:         [dynamic]Glyph_Position, // Glyph positioning information
 
 	// Current processing state
-	script:            Script_Tag, // Current script being processed
+	script:            Script_Tag,   // Current script being processed
 	language:          Language_Tag, // Current language
-	direction:         Direction, // Text direction
+	direction:         Direction,    // Text direction
 
 	// Cursor State Management
-	cursor:            int, // Current processing position
-	skip_mask:         u16be, // For mark filtering sets
+	cursor:            int,              // Current processing position
+	skip_mask:         u16be,            // For mark filtering sets
 	flags:             ttf.Lookup_Flags, // Current lookup flags
 
 	// Configuration
 	clustering_policy: Clustering_Policy,
-	control_flags:     Control_Flags, // Buffer-wide control flags
+	control_flags:     Control_Flags,     // Buffer-wide control flags
 
 	// Special glyphs
 	undefined_glyph:   Glyph, // Glyph to use for undefined characters
@@ -30,13 +30,13 @@ Shaping_Buffer :: struct {
 
 	// Scratch space for temporary operations
 	scratch:           struct {
-		glyphs:           [dynamic]Glyph_Info, // decomp "ä" into "a" + "¨"
-		component_glyphs: [dynamic]Glyph, // multi-sub; ligatures etc
-		positions:        [dynamic]Glyph_Position,
-		decomposition:    [dynamic]rune, // For temporary storage of decomposed characters
-		clusters:         [dynamic]uint, // For cluster analysis
-		// states:        [dynamic]u16, // For state machines
-		components:       [dynamic]Ligature_Info, // For tracking ligature components
+		glyphs:           [dynamic]Glyph_Info,     // decomp "ä" into "a" + "¨"
+		component_glyphs: [dynamic]Glyph,          // multi-sub; ligatures etc
+		positions:        [dynamic]Glyph_Position, //
+		decomposition:    [dynamic]rune,           // For temporary storage of decomposed characters
+		clusters:         [dynamic]uint,           // For cluster analysis
+		// states:        [dynamic]u16,            // For state machines
+		components:       [dynamic]Ligature_Info,  // For tracking ligature components
 	},
 }
 

@@ -2,8 +2,8 @@ package shaper
 // TODO: move to ttf??
 import ttf "../ttf"
 
-Latin_Default_Features := create_feature_set(.ccmp, .liga, .clig)
-Arabic_Default_Features := create_feature_set(.init, .fina, .medi, .rlig)
+Latin_Default_Features      := create_feature_set(.ccmp, .liga, .clig)
+Arabic_Default_Features     := create_feature_set(.init, .fina, .medi, .rlig)
 Devanagari_Default_Features := create_feature_set(.ccmp, .nukt, .akhn, .half)
 
 get_default_features :: proc(script: Script_Tag) -> Feature_Set {
@@ -21,8 +21,8 @@ get_default_features :: proc(script: Script_Tag) -> Feature_Set {
 }
 
 // Define required stages per script
-Latin_Required_Stages :: 2 // ccmp and locl stages
-Arabic_Required_Stages :: 2 // rlig/ccmp and form features
+Latin_Required_Stages      :: 2 // ccmp and locl stages
+Arabic_Required_Stages     :: 2 // rlig/ccmp and form features
 Devanagari_Required_Stages :: 8 // Up through half forms for proper conjuncts
 
 get_script_feature_stages :: proc(
@@ -46,35 +46,35 @@ get_script_feature_stages :: proc(
 
 
 Latin_Feature_Stages := [][]Feature_Tag {
-	{.ccmp}, // Stage 1: Composition/decomposition
-	{.locl}, // Stage 2: Localization features
-	{.rlig, .liga, .clig}, // Stage 3: Ligatures
+	{.ccmp},                      // Stage 1: Composition/decomposition
+	{.locl},                      // Stage 2: Localization features
+	{.rlig, .liga, .clig},        // Stage 3: Ligatures
 	{.lnum, .onum, .pnum, .tnum}, // Stage 4: Number spacing/style
-	{.frac, .numr, .dnom}, // Stage 5: Fractions
-	{.salt, .ss01, .ss02}, // Stage 6: Stylistic sets
+	{.frac, .numr, .dnom},        // Stage 5: Fractions
+	{.salt, .ss01, .ss02},        // Stage 6: Stylistic sets
 }
 
 Arabic_Feature_Stages := [][]Feature_Tag {
-	{.rlig, .ccmp}, // Stage 1: Required
+	{.rlig, .ccmp},               // Stage 1: Required
 	{.isol, .init, .medi, .fina}, // Stage 2: Form features
-	{.liga}, // Stage 3: Ligatures
-	{.mset}, // Stage 4: Mark positioning
+	{.liga},                      // Stage 3: Ligatures
+	{.mset},                      // Stage 4: Mark positioning
 }
 Devanagari_Feature_Stages := [][]Feature_Tag {
-	{.ccmp}, // Stage 1: Composition/decomposition
-	{.locl}, // Stage 2: Localized forms
-	{.nukt}, // Stage 3: Nukta forms - attach nukta to base glyph
-	{.akhn}, // Stage 4: Akhand - required ligature formation
-	{.rphf}, // Stage 5: Reph forms - Ra + Halant special form
-	{.blwf}, // Stage 6: Below-base forms
-	{.half}, // Stage 7: Half forms - consonant + halant forms
-	{.pstf}, // Stage 8: Post-base forms
-	{.vatu}, // Stage 9: Vattu variants - special combining of Ra
-	{.cjct}, // Stage 10: Conjunct forms - other conjunct formations
+	{.ccmp},                      // Stage 1: Composition/decomposition
+	{.locl},                      // Stage 2: Localized forms
+	{.nukt},                      // Stage 3: Nukta forms - attach nukta to base glyph
+	{.akhn},                      // Stage 4: Akhand - required ligature formation
+	{.rphf},                      // Stage 5: Reph forms - Ra + Halant special form
+	{.blwf},                      // Stage 6: Below-base forms
+	{.half},                      // Stage 7: Half forms - consonant + halant forms
+	{.pstf},                      // Stage 8: Post-base forms
+	{.vatu},                      // Stage 9: Vattu variants - special combining of Ra
+	{.cjct},                      // Stage 10: Conjunct forms - other conjunct formations
 	{.pres, .abvs, .blws, .psts}, // Stage 11: Presentation forms
-	{.haln}, // Stage 12: Halant forms
-	{.calt}, // Stage 13: Contextual alternates
-	{.liga, .clig}, // Stage 14: Standard ligatures
+	{.haln},                      // Stage 12: Halant forms
+	{.calt},                      // Stage 13: Contextual alternates
+	{.liga, .clig},               // Stage 14: Standard ligatures
 }
 select_features_to_apply :: proc(
 	script: Script_Tag,

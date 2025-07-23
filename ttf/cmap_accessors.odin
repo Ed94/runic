@@ -18,22 +18,21 @@ get_format2_subheader_key :: proc(
 
 get_format2_subheader :: proc(
 	data: []byte,
-	f2: ^Format2,
-	index: uint,
+	f2:    ^Format2,
+	index:  uint,
 ) -> (
-	first_code: u16,
-	entry_count: u16,
-	id_delta: i16,
+	first_code:      u16,
+	entry_count:     u16,
+	id_delta:        i16,
 	id_range_offset: u16,
 ) #no_bounds_check {
 	if index >= f2.sub_headers_count {
 		return 0, 0, 0, 0
 	}
-
-	offset := f2.sub_headers_offset + index * 8
-	first_code = read_u16(data, offset)
-	entry_count = read_u16(data, offset + 2)
-	id_delta = read_i16(data, offset + 4)
+	offset         := f2.sub_headers_offset + index * 8
+	first_code      = read_u16(data, offset)
+	entry_count     = read_u16(data, offset + 2)
+	id_delta        = read_i16(data, offset + 4)
 	id_range_offset = read_u16(data, offset + 6)
 	return
 }
@@ -46,21 +45,20 @@ get_format2_glyph_id :: proc(data: []byte, f2: ^Format2, index: uint) -> u16 #no
 // Format 4 accessors
 get_format4_segment :: proc(
 	data: []byte,
-	f4: ^Format4,
-	index: uint,
+	f4:    ^Format4,
+	index:  uint,
 ) -> (
-	start_code: u16,
-	end_code: u16,
-	id_delta: i16,
+	start_code:      u16,
+	end_code:        u16,
+	id_delta:        i16,
 	id_range_offset: u16,
 ) #no_bounds_check {
 	if index >= f4.segment_count {
 		return 0, 0, 0, 0
 	}
-
-	end_code = read_u16(data, f4.end_code_offset + index * 2)
-	start_code = read_u16(data, f4.start_code_offset + index * 2)
-	id_delta = read_i16(data, f4.id_delta_offset + index * 2)
+	end_code        = read_u16(data, f4.end_code_offset        + index * 2)
+	start_code      = read_u16(data, f4.start_code_offset      + index * 2)
+	id_delta        = read_i16(data, f4.id_delta_offset        + index * 2)
 	id_range_offset = read_u16(data, f4.id_range_offset_offset + index * 2)
 	return
 }
@@ -130,32 +128,28 @@ get_format12_group :: proc(
 	if index >= uint(f12.num_groups) {
 		return {}
 	}
-
 	group_offset := f12.groups_offset + index * 12
-
 	return Character_Group {
 		start_char_code = read_u32(data, group_offset),
-		end_char_code = read_u32(data, group_offset + 4),
-		start_glyph_id = read_u32(data, group_offset + 8),
+		end_char_code   = read_u32(data, group_offset + 4),
+		start_glyph_id  = read_u32(data, group_offset + 8),
 	}
 }
 
 // Format 13 accessors 
 get_format13_group :: proc(
 	data: []byte,
-	f13: ^Format13,
+	f13:  ^Format13,
 	index: uint,
 ) -> Character_Group_Single_Glyph #no_bounds_check {
 	if index >= uint(f13.num_groups) {
 		return {}
 	}
-
 	group_offset := f13.groups_offset + index * 12
-
 	return Character_Group_Single_Glyph {
 		start_char_code = read_u32(data, group_offset),
-		end_char_code = read_u32(data, group_offset + 4),
-		glyph_id = read_u32(data, group_offset + 8),
+		end_char_code   = read_u32(data, group_offset + 4),
+		glyph_id        = read_u32(data, group_offset + 8),
 	}
 }
 
