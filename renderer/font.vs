@@ -13,6 +13,6 @@ flat out int bufferIndex;
 
 void main() {
     gl_Position = projection * view * model * vec4(vertexPosition, 0, 1);
-    uv = vertexUV;
+    uv          = vertexUV;
     bufferIndex = vertexIndex;
 }

@@ -100,8 +100,8 @@ get_format8_group :: proc(
 
 	return Character_Group {
 		start_char_code = read_u32(data, group_offset),
-		end_char_code = read_u32(data, group_offset + 4),
-		start_glyph_id = read_u32(data, group_offset + 8),
+		end_char_code   = read_u32(data, group_offset + 4),
+		start_glyph_id  = read_u32(data, group_offset + 8),
 	}
 }
 
@@ -162,16 +162,15 @@ get_format14_variation_selector :: proc(
 	if index >= uint(f14.num_var_selectors) {
 		return {}
 	}
-
 	var_sel_offset := f14.var_selectors_offset + index * 11
 
 	// Read 24-bit variation selector
 	selector :=
-		(u32(data[var_sel_offset]) << 16) |
-		(u32(data[var_sel_offset + 1]) << 8) |
-		u32(data[var_sel_offset + 2])
+		(u32(data[var_sel_offset    ]) << 16) |
+		(u32(data[var_sel_offset + 1]) <<  8) |
+		 u32(data[var_sel_offset + 2])
 
-	default_uvs_offset := read_u32(data, var_sel_offset + 3)
+	default_uvs_offset    := read_u32(data, var_sel_offset + 3)
 	nondefault_uvs_offset := read_u32(data, var_sel_offset + 7)
 
 	result := Variation_Selector {
@@ -191,7 +190,6 @@ get_format14_variation_selector :: proc(
 		ndef_offset := f14.offset + uint(nondefault_uvs_offset)
 		result.nondefault_uvs_range_count = read_u32(data, ndef_offset)
 	}
-
 	return result
 }
 
